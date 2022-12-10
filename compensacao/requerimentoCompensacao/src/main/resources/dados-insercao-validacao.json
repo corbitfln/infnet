@@ -1,0 +1,169 @@
+//ENDPOINT1: /participantes-compensacao/ consultarParticipantes
+
+
+//ENDPOINT2: /requerimentos-pensao criarRequerimento
+
+
+//JSON1)  João com um dependente - cpfBeneficiario": "378.677.566-47"
+{
+  "cpfBeneficiario": "378.677.566-47",
+  "dataInicioBeneficioPensao": "2021-01-01",
+  "dependentes": [
+    {
+      "estadoCivil": 1,
+      "vinculo": 2,
+      "cpf": "522.109.880-63",
+      "nome": "Filho João 001  "
+    }
+  ],
+  "destinatario": 1,
+  "solicitante": 2,
+  "situacao": 1,
+  "rendaMensalInicial": 920
+}
+
+
+
+//JSON2)  Maria  com dois depententes - cpf beneficiário :"172.868.217-76"
+
+{
+  "cpfBeneficiario": "172.868.217-76",
+  "dataInicioBeneficioPensao": "2021-02-01",
+  "dependentes": [
+    {
+      "estadoCivil": 1,
+      "vinculo": 2,
+      "cpf": "857.328.262-20",
+      "nome": "Filho Maria 001  "
+    },
+    {
+      "estadoCivil": 1,
+      "vinculo": 2,
+      "cpf": "482.379.552-00",
+      "nome": "Filho Maria 002  "
+    }
+  ],
+  "destinatario": 3,
+  "solicitante": 4,
+  "situacao": 1,
+  "rendaMensalInicial": 110
+}
+
+
+
+//ENDPOINT3: /requerimentos-pensao atualizarRequerimento
+
+
+//{
+//  "identificador": 1
+//  "idSituacao": "2"
+//}
+
+
+
+
+//ENDPOINT4: /requerimentos-pensao/{id} cancelarRequerimento
+//"id": 1
+
+
+//ENDPOINT5: /requerimentos-pensao/consultarRequerimentos consultarRequerimentos
+
+
+
+
+//CENÁRIOS DE VALIDAÇÃO
+
+
+//1) Data referência menor que 05/10/1988
+
+{
+  "cpfBeneficiario": "986.848.790-07",
+  "dataInicioBeneficioPensao": "1988-10-04",
+  "dependentes": [
+    {
+      "estadoCivil": 1,
+      "vinculo": 2,
+      "cpf": "522.109.880-63",
+      "nome": "Filho João 001  "
+    }
+  ],
+  "destinatario": 1,
+  "solicitante": 2,
+  "situacao": 1,
+  "rendaMensalInicial": 920
+}
+
+
+//2) Dependente com vínculo de filho e menor sob guarda diferente de "solteiro"
+
+
+//2.1) Caso vínculo filho e estado civil viúvo, botar 1 e 2
+
+{
+  "cpfBeneficiario": "986.848.790-07",
+  "dataInicioBeneficioPensao": "19881005",
+  "dependentes": [
+    {
+      "estadoCivil": 1,
+      "vinculo": 3,
+      "cpf": "325.218.020-00",
+      "nome": "Filho Maria 001  "
+    },
+    {
+      "estadoCivil": 3,
+      "vinculo": 2,
+      "cpf": "496.731.460-04",
+      "nome": "Filho Maria 002  "
+    }
+  ],
+  "destinatario": 7,
+  "solicitante": 8,
+  "rendaMensalInicial": 1100,
+  "situacao": 1
+}
+
+
+//2.1) Caso vínculo menor sob guarda e estado civil divorciado
+
+{
+  "cpfBeneficiario": "948.948.390-75",
+  "dataInicioBeneficioPensao": "1988-10-05",
+  "dependentes": [
+    {
+      "codEstadoCivil": 1,
+      "codVinculo": 2,
+      "cpf": "325.218.020-00",
+      "nome": "Filho Maria 001  "
+    },
+    {
+      "estadoCivil": 5,
+      "vinculo": 8,
+      "cpf": "496.731.460-04",
+      "nome": "Filho Maria 002  "
+    }
+  ],
+  "destinatario": 9,
+  "solicitante": 10,
+  "rendaMensalInicial": 1100,
+  "situacao": 1
+}
+
+//3) Validação de Requerimentos repetidos
+
+{
+  "cpfBeneficiario": "172.868.217-76",
+  "dataInicioBeneficioPensao": "2021-01-01",
+  "dependentes": [
+    {
+      "estadoCivil": 1,
+      "vinculo": 2,
+      "cpf": "522.109.880-63",
+      "nome": "Filho João 001  "
+    }
+  ],
+  "destinatario": 3,
+  "solicitante": 12,
+  "rendaMensalInicial": 920,
+  "situacao": 1
+}
+
